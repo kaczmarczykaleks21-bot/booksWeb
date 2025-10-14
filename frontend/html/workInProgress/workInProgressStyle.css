@@ -1,0 +1,11 @@
+body {
+    background-color: #FF1744;
+    color: white;
+    font:
+    italic 2rem "Fira Sans",
+    serif;
+}
+
+h1,p {
+    text-align: center;
+}

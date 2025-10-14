@@ -1,0 +1,50 @@
+body {
+    background-color: #FF1744;
+    color: white;
+    font:
+    italic 2rem "Fira Sans",
+    serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonContainer {
+    background-color: #f01440;
+    color: white;
+    border: solid 2px #f01440;
+}
+
+.noUnderline{
+        text-decoration: none;
+        color: white;
+}
+
+.buttons {
+    background-color: #FF1744;
+    color: white;
+    border: solid 2px #FF1744;
+    padding: 4px;
+    margin: 4px;
+    font: small-caps bold 30px/1 sans-serif;
+}
+
+.buttons:hover {
+    background-color: white;
+    color: #FF1744;
+    border: solid 2px #FF1744;
+    cursor: pointer;
+
+}
+
+.centerDiv {
+    display: flex;
+    justify-content: center;
+}
