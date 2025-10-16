@@ -2,7 +2,7 @@ body {
     background-color: #FF1744;
     color: white;
     font:
-    italic 2rem "Fira Sans",
+    italic 1.5rem "Fira Sans",
     serif;
 }
 
@@ -16,35 +16,69 @@ h1 {
     align-items: center;
 }
 
-.buttonContainer {
-    background-color: #f01440;
+.subContainer {
+    background-color: #ed1b45;
     color: white;
-    border: solid 2px #f01440;
+    padding:6px;
 }
 
-.noUnderline{
-        text-decoration: none;
-        color: white;
+.centerBtns {
+    display: flex;
+    justify-content: center;
 }
 
-.buttons {
+.previousBtn, .deleteBtn, .edit, .nextBtn, .addBtn {
+    margin-left: 4px;
+    margin-right: 4px;
     background-color: #FF1744;
+    border: solid 2px #FF1744;
     color: white;
-    border: solid 2px #FF1744;
-    padding: 4px;
-    margin: 4px;
-    font: small-caps bold 30px/1 sans-serif;
+    font:
+    italic 1.8rem "Fira Sans",
+    serif;
 }
 
-.buttons:hover {
+.addBtn:hover{
     background-color: white;
-    color: #FF1744;
-    border: solid 2px #FF1744;
+    color: #ed1b45;;
     cursor: pointer;
-
+    border: solid 2px #FF1744;
+    font:italic 1.8rem "Fira Sans",
+    serif;
 }
 
-.centerDiv {
+.previousBtn:hover, .deleteBtn:hover, .edit:hover, .nextBtn:hover {
+    background-color: #ed1b45;
+    color: white;
+    cursor: pointer;
+}
+
+.inputs {
+    background-color: white;
+    border: solid 2px #ed1b45;
+    color:black;
+        font:
+    italic 1.5rem "Fira Sans",
+    serif;
+}
+
+#displayInfo{
+    background-color: #ed1b45;
+    color: white;
+    padding: 6px;
+}
+
+#displayInline {
+    display: inline;
+}
+
+.bookDescryption {
+    background-color: white;
+    border: solid 2px #ed1b45;
+    color: black
+}
+
+.centerSpan {
     display: flex;
     justify-content: center;
 }

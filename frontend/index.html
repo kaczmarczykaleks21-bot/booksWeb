@@ -7,36 +7,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">  
     </head>
     <body>
-
         <h1>Internetowa księgarnia</h1>
-
         <div class="container">
-            <div class="buttonContainer">
-                <div class="centerDiv">
+            <div class="subContainer">
+            <div class="bookForm">
+                <form>
+                    <label for="title">Tytuł:</label>
+                    <input type="text" name="title" class="inputs" required>
+                    <label for="author">Autor:</label>
+                    <input type="text" name="author" class="inputs" required>
+                    <label for="description">Opis:</label>
+                    <input type="text" name="description" class="inputs" required> 
+                    <button class="addBtn">Dodaj</button>
+                </form>
+                <hr>
+            </div>
 
-                    
-                    <a href="/frontend/html/browser/wyszukiwarka.html"><button class="buttons" onclick=""> Wyszukaj książkę</button></a>
-
-                </div>
-
-                <div class="centerDiv">
-                    <a href="/frontend/html/addBook/addBook.html"><button class="buttons">Dodaj książkę</button></a>
-                </div>
-
-                <div class="centerDiv">                    
-                        <a href="#"><button class="buttons">Zapytaj o książkę</button></a>
-                </div>
-
-                <div class="centerDiv">
-                        <a href="#"><button class="buttons">Ustawienia</button></a>
-                </div>
-
-                <div class="centerDiv">                   
-                        <a href="#"><button class="buttons">O nas</button></a>
-                </div>
-
+        <div class="displayBooks">
+            <div id="displayInfo">
+                <span class="centerSpan"><h2 class="bookTitle">Tytul:</h2></span>
+                <span><p class="bookAuthor">Autor:</p></span>
+                <span><p class="numberOfPages">Liczba stron:</p></span>
+                <span><p>Opis:</p></span>
+                <p class="bookDescryption">...</p>
+                <hr>
+            <span class="centerBtns" id="centerSpan">
+                <span class="buttons">
+                    <button class="previousBtn">Poprzednia</button><button class="deleteBtn">Usuń</button><button class="edit">Edytuj</button><button class="nextBtn">Następna</button>
+                </span>
+            </span>
             </div>
         </div>
+        </div>
+        </div>
     </body>
-    <script src="index.js"></script>
+    <script src="script.js"></script>
 </html>
