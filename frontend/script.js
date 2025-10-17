@@ -20,6 +20,8 @@ const deleteBtn = document.querySelector('.deleteBtn');
 const editBtn = document.querySelector('.edit');
 const addBtn = document.querySelector('.addBtn');
 
+
+
 async function loadBooks() {
   try {
     const res = await fetch(API_URL);
@@ -120,6 +122,44 @@ nextBtn.addEventListener('click', () => {
   if (books.length === 0) return;
   currentIndex = (currentIndex + 1) % books.length;
   displayBook();
+});
+
+
+// walidacja
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  const titleInput = document.querySelector("input[name='title']");
+  const authorInput = document.querySelector("input[name='author']");
+  const descInput = document.querySelector("input[name='description']");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const title = titleInput.value.trim();
+    const author = authorInput.value.trim();
+    const description = descInput.value.trim();
+
+  
+    if (!title || !author || !description) {
+      alert("❌ Wszystkie pola muszą być wypełnione!");
+      return;
+    }
+
+    const response = await fetch("http://localhost:3000/api/books", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, author, description })
+    });
+
+    if (response.ok) {
+      alert("✅ Książka dodana!");
+      form.reset();
+    } else {
+      const error = await response.json();
+      alert(`Błąd: ${error.message}`);
+    }
+  });
 });
 
 
