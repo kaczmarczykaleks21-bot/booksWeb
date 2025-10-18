@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
   }
   const finalQuote = quote || '';
   db.run(
-    'INSERT INTO books (title, author, description, genre, quote) VALUES (?, ?, ?)',
+    'INSERT INTO books (title, author, description, genre, quote) VALUES (?, ?, ?, ?, ?)',
     [title, author, description, genre, finalQuote],
     function (err) {
       if (err) return res.status(500).json({ error: err.message });
