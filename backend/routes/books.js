@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const { title, author, description, genre, quote } = req.body;
   if (!genre) {
-    return res.status(400).json({ message: 'Gatunek musi zostać wybrany.' });
+    return res.status(400).json({message: 'Gatunek musi zostać wybrany!'});
   }
   const finalQuote = quote || '';
   db.run(
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
     [title, author, description, genre, finalQuote],
     function (err) {
       if (err) return res.status(500).json({ error: err.message });
-      res.json({ id: this.lastID, title, author, description });
+      res.json({ id: this.lastID, title, author, description, genre, quote: finalQuote } );
     }
   );
 });
@@ -32,11 +32,11 @@ router.put('/:id', (req, res) => {
   const { id } = req.params;
   const { title, author, description, genre, quote} = req.body;
   if (!genre) {
-    return res.status(400).json({ message: 'Gatunek musi zostać wybrany.' });
+    return res.status(400).json({ message: 'Gatunek musi zostać wybrany!' });
   }
   const finalQuote = quote || '';
   db.run(
-    'UPDATE books SET title=?, author=?, description=? genre=?, quote=? WHERE id=?',
+    'UPDATE books SET title=?, author=?, description=?, genre=?, quote=? WHERE id=?',
     [title, author, description, genre, finalQuote, id],
     function (err) {
       if (err) return res.status(500).json({ error: err.message });
