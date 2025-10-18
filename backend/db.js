@@ -8,6 +8,8 @@ db.serialize(() => {
     author TEXT,
     pages TEXT,
     description TEXT
+    genre TEXT,
+    quote TEXT 
   )`);
 });
 
