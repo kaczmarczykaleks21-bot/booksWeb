@@ -117,3 +117,21 @@ description	TEXT	opis książki
   npm install -g live-server
 
   Po tym polecenie: npm run dev uruchomi frontend i backend automatycznie.
+
+!!!Zmiany w ramach etapu B!!!
+
+Dodano dwa nowe pola do encji książki:
+- **genre** – gatunek książki (pole wymagane, walidowane po stronie backendu i frontendu),
+- **quote** – cytat z książki (pole opcjonalne).
+
+Zaktualizowano:
+- model/tabelę `books` – dodano kolumny `genre` i `quote`,
+- API REST – rozszerzono obsługę CRUD o nowe pola + walidację,
+- frontend – formularz dodawania/edycji oraz widok szczegółów,
+- README – sekcja o nowych polach i sposobie testowania.
+
+Testowanie:
+1. Uruchom backend (`node server.js`).
+2. Otwórz `index.html` w przeglądarce.
+3. Spróbuj dodać książkę bez gatunku (powinien pojawić się komunikat walidacyjny).  
+4. Dodaj książkę z gatunkiem i (opcjonalnie) cytatem, dane wyświetlą się poprawnie w liście.
