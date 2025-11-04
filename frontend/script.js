@@ -1,6 +1,7 @@
 'use strict';
 
 const API_URL = 'http://localhost:3000/api/books';
+const API_BASE = 'http://localhost:3000/api';
 
 let books = [];
 let currentIndex = 0;
@@ -24,7 +25,30 @@ const deleteBtn = document.querySelector('.deleteBtn');
 const editBtn = document.querySelector('.edit');
 const addBtn = document.querySelector('.addBtn');
 
+// --- Logowanie i rejestracja ---
+const loginBtn = document.getElementById('loginBtn');
+const registerBtn = document.getElementById('registerBtn');
+const logoutBtn = document.getElementById('logoutBtn'); // Dodaj ten przycisk w HTML
+const loginModalBox = document.getElementById('loginModalBox');
+const registerModalBox = document.getElementById('registerModalBox');
+const userIcon = document.getElementById('userIcon');
 
+
+function registerLoginFormsDisplay(modalID, blurID) {
+  loginModalBox.classList.add('hidden');
+  registerModalBox.classList.add('hidden');
+  modalID.classList.remove('hidden');
+  blurID.classList.add('blur');
+}
+
+function closeAnyModal() {
+  loginModalBox.classList.add('hidden');
+  registerModalBox.classList.add('hidden');
+  loginContainer.classList.remove('blur');
+  registerContainer.classList.remove('blur');
+}
+
+// --- Książki ---
 
 async function loadBooks() {
   try {
@@ -41,7 +65,6 @@ async function loadBooks() {
   }
 }
 
-// Wyświetlenie książki
 function displayBook() {
   if (books.length === 0) {
     clearDisplay();
@@ -55,7 +78,6 @@ function displayBook() {
   quoteDisplay.textContent = `Cytat: ${book.quote || '-'}`;
 }
 
-// Wyczyść widok (gdy brak książek)
 function clearDisplay() {
   titleDisplay.textContent = 'Tytuł: -';
   authorDisplay.textContent = 'Autor: -';
@@ -64,7 +86,7 @@ function clearDisplay() {
   quoteDisplay.textContent = 'Cytat: -';
 }
 
-// Dodawanie nowej książki
+// --- Dodawanie książki ---
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const newBook = {
@@ -89,7 +111,7 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-// Usuwanie książki
+// --- Usuwanie książki ---
 deleteBtn.addEventListener('click', async () => {
   if (books.length === 0) return;
   const id = books[currentIndex].id;
@@ -97,7 +119,7 @@ deleteBtn.addEventListener('click', async () => {
   await loadBooks();
 });
 
-// Edycja książki
+// --- Edycja książki ---
 editBtn.addEventListener('click', async () => {
   if (books.length === 0) return;
   const book = books[currentIndex];
@@ -107,7 +129,7 @@ editBtn.addEventListener('click', async () => {
   const newGenre = prompt('Nowy gatunek:', book.genre);
   const newQuote = prompt('Nowy cytat:', book.quote);
 
-  if (!newTitle || !newAuthor || !newDescription || !newGenre || !newQuote) return;
+  if (!newTitle || !newAuthor || !newDescription || !newGenre) return;
 
   await fetch(`${API_URL}/${book.id}`, {
     method: 'PUT',
@@ -124,63 +146,95 @@ editBtn.addEventListener('click', async () => {
   await loadBooks();
 });
 
-// Poprzednia książka
+// --- Nawigacja książek ---
 prevBtn.addEventListener('click', () => {
   if (books.length === 0) return;
   currentIndex = (currentIndex - 1 + books.length) % books.length;
   displayBook();
 });
 
-// Następna książka
 nextBtn.addEventListener('click', () => {
   if (books.length === 0) return;
   currentIndex = (currentIndex + 1) % books.length;
   displayBook();
 });
 
+// --- Rejestracja ---
+const registerForm = document.querySelector('#registerModalBox form');
+registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = registerForm.querySelector('input[name="email"]').value;
+  const username = registerForm.querySelector('input[name="register"]').value;
+  const password = registerForm.querySelector('input[name="password"]').value;
 
-// walidacja
-
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
-  const titleInput = document.querySelector("input[name='title']");
-  const authorInput = document.querySelector("input[name='author']");
-  const descInput = document.querySelector("input[name='description']");
-  const genreInput = document.querySelector("input[name='genre']");
-  const quoteInput = document.querySelector("input[name='quote']");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const title = titleInput.value.trim();
-    const author = authorInput.value.trim();
-    const description = descInput.value.trim();
-    const genre = genreInput.value.trim();
-    const quote = quoteInput.value.trim();
-
-  
-    if (!title || !author || !description) {
-      alert("❌ Wszystkie pola muszą być wypełnione!");
-      return;
-    }
-
-    const response = await fetch("http://localhost:3000/api/books", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, author, description, genre, quote }),
+  try {
+    const res = await fetch(`${API_BASE}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, username, password }),
     });
 
-    if (response.ok) {
-      alert("✅ Książka dodana!");
-      form.reset();
-    } else {
-      const error = await response.json();
-      alert(`Błąd: ${error.message}`);
-    }
-  });
+    const data = await res.json();
+    alert(data.message);
+    if (res.ok) closeAnyModal();
+  } catch (err) {
+    alert('Błąd połączenia z serwerem.');
+  }
 });
 
+// --- Logowanie ---
+const loginForm = document.querySelector('#loginModalBox form');
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = loginForm.querySelector('input[name="login"]').value;
+  const password = loginForm.querySelector('input[name="password"]').value;
 
-loadBooks();
+  try {
+    const res = await fetch(`${API_BASE}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
 
+    const data = await res.json();
+    alert(data.message);
+    if (res.ok) {
+      localStorage.setItem('user', JSON.stringify({ username }));
+      closeAnyModal();
+      updateAuthUI();
+    }
+  } catch (err) {
+    alert('Błąd połączenia z serwerem.');
+  }
+});
 
+// --- Wylogowanie ---
+logoutBtn.addEventListener('click', () => {
+  localStorage.removeItem('user');
+  updateAuthUI();
+  alert('Zostałeś wylogowany.');
+  loginContainer.classList.remove('blur');
+  registerContainer.classList.remove('blur');
+});
+
+// --- Aktualizacja UI ---
+function updateAuthUI() {
+  const user = localStorage.getItem('user');
+  if (user) {
+    loginBtn.classList.add('hidden');
+    registerBtn.classList.add('hidden');
+    logoutBtn.classList.remove('hidden');
+    userIcon.classList.remove('hidden');
+  } else {
+    loginBtn.classList.remove('hidden');
+    registerBtn.classList.remove('hidden');
+    logoutBtn.classList.add('hidden');
+    userIcon.classList.add('hidden');
+  }
+}
+
+// --- Uruchom po starcie ---
+document.addEventListener('DOMContentLoaded', () => {
+  updateAuthUI();
+  loadBooks();
+});
