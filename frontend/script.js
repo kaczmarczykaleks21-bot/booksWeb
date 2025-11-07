@@ -33,6 +33,8 @@ const loginModalBox = document.getElementById('loginModalBox');
 const registerModalBox = document.getElementById('registerModalBox');
 const userIcon = document.getElementById('userIcon');
 
+// główna zawartość strony klasa
+const booksContainer = document.getElementsByClassName('container');
 
 function registerLoginFormsDisplay(modalID, blurID) {
   loginModalBox.classList.add('hidden');
