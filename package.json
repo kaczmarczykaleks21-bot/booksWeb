@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start": "node server.js"
-  },
+ "scripts": {
+  "start": "node server.js",
+  "postinstall": "npm rebuild sqlite3 --build-from-source"
+},
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kaczmarczykaleks21-bot/booksWeb.git"
