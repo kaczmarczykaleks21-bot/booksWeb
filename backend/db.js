@@ -1,6 +1,7 @@
 const Database = require('better-sqlite3');
 const db = new Database('database.db');
 
+
 db.prepare(`
   CREATE TABLE IF NOT EXISTS books (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,7 +22,7 @@ db.prepare(`
   )
 `).run();
 
-
+// --- Seed danych startowych ---
 function seedBooks() {
   const count = db.prepare('SELECT COUNT(*) AS count FROM books').get().count;
 
