@@ -20,11 +20,9 @@
   },
   "homepage": "https://github.com/kaczmarczykaleks21-bot/booksWeb#readme",
   "dependencies": {
-    "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^12.4.6",
-    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^4.18.2"
   }
 }
