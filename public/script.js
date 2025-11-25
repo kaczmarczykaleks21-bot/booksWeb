@@ -32,9 +32,16 @@ const logoutBtn = document.getElementById('logoutBtn'); // Dodaj ten przycisk w 
 const loginModalBox = document.getElementById('loginModalBox');
 const registerModalBox = document.getElementById('registerModalBox');
 const userIcon = document.getElementById('userIcon');
+//const loginContainer = document.getElementById('');
+//const registerContainer = document.getElementById('');
 
 // główna zawartość strony klasa
-const booksContainer = document.getElementsByClassName('container');
+const booksContainer = document.querySelector('.container');
+const mainContent = document.querySelector('.subContainer');
+const startingContent = document.querySelector('.subContainer2');
+
+console.log(mainContent);
+console.log(startingContent);
 
 function registerLoginFormsDisplay(modalID, blurID) {
   loginModalBox.classList.add('hidden');
@@ -48,6 +55,10 @@ function closeAnyModal() {
   registerModalBox.classList.add('hidden');
   loginContainer.classList.remove('blur');
   registerContainer.classList.remove('blur');
+}
+
+function loginChanged(){
+
 }
 
 // --- Książki ---
@@ -148,7 +159,6 @@ editBtn.addEventListener('click', async () => {
   await loadBooks();
 });
 
-// --- Nawigacja książek ---
 prevBtn.addEventListener('click', () => {
   if (books.length === 0) return;
   currentIndex = (currentIndex - 1 + books.length) % books.length;
@@ -161,7 +171,6 @@ nextBtn.addEventListener('click', () => {
   displayBook();
 });
 
-// --- Rejestracja ---
 const registerForm = document.querySelector('#registerModalBox form');
 registerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -184,7 +193,6 @@ registerForm.addEventListener('submit', async (e) => {
   }
 });
 
-// --- Logowanie ---
 const loginForm = document.querySelector('#loginModalBox form');
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -210,7 +218,6 @@ loginForm.addEventListener('submit', async (e) => {
   }
 });
 
-// --- Wylogowanie ---
 logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('user');
   updateAuthUI();
@@ -219,7 +226,6 @@ logoutBtn.addEventListener('click', () => {
   registerContainer.classList.remove('blur');
 });
 
-// --- Aktualizacja UI ---
 function updateAuthUI() {
   const user = localStorage.getItem('user');
   if (user) {
@@ -227,15 +233,18 @@ function updateAuthUI() {
     registerBtn.classList.add('hidden');
     logoutBtn.classList.remove('hidden');
     userIcon.classList.remove('hidden');
+    startingContent.classList.add('hidden');
+    mainContent.classList.remove('hidden');
   } else {
     loginBtn.classList.remove('hidden');
     registerBtn.classList.remove('hidden');
     logoutBtn.classList.add('hidden');
     userIcon.classList.add('hidden');
+    startingContent.classList.remove('hidden');
+    mainContent.classList.add('hidden');
   }
 }
 
-// --- Uruchom po starcie ---
 document.addEventListener('DOMContentLoaded', () => {
   updateAuthUI();
   loadBooks();

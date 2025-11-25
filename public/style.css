@@ -3,16 +3,22 @@
 body {
     background-color: #FF1744;
     color: white;
-    font:
-    italic 1.5rem "Fira Sans",
-    serif;
+     font-family: "Merriweather", serif;
+     font-size: 1.4rem;
 }
 
+/* hidden */
+
+.hidden {
+    display: none;
+}
 
 /* NAGŁÓWEK STRONY */
 
 header {
     display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #ed1b45;
     margin-bottom: 20px;
 }
@@ -131,6 +137,54 @@ main {
     justify-content: center;
 }
 
+/* Część początkowa strony(przed zalogowaniem) */
+
+#startingContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.subContainer2 {
+    background-color: #ed1b45;
+    color: white;
+    padding:6px;
+}
+
+#startingContent h2 {
+    color: gold;
+    font-weight: bold;
+}
+
+#introductionTxt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ed1b45;
+    color: white;
+    padding:6px;
+}
+
+#siteIntroduction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+section {
+    padding: 10px;
+    max-width: 50%;
+}
+
+article {
+    margin-top: 20px;
+}
+
 /* MODALE */
 
 .blur {
@@ -228,6 +282,6 @@ main {
     text-align: left;
 }
 
-.hidden {
-    display: none;
-}
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
