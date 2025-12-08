@@ -1,104 +1,194 @@
 <!DOCTYPE html>
 <html lang="pl">
-    <head>
-        <meta charset="utf-8">
-        <title>Księgarnia</title>
-        <link rel="stylesheet" href="style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">  
-        <script src="https://kit.fontawesome.com/b785ec014a.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <header>
-            <span>
-                <h1>Internetowa księgarnia</h1>
-            </span>
+  <head>
+    <meta charset="utf-8" />
+    <title>Księgarnia</title>
+    <link rel="stylesheet" href="./style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://kit.fontawesome.com/b785ec014a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <span>
+        <h1><i class="fa-solid fa-book"></i>Papierowy Zaułek</h1>
+      </span>
 
-            <span>
-                <button id="loginBtn" onclick="registerLoginFormsDisplay(loginModalBox, loginContainer)">Zaloguj się</button>
-                <button id="registerBtn" onclick="registerLoginFormsDisplay(registerModalBox, registerContainer)">Zarejestruj się</button>
+      <span>
+        <button
+          id="loginBtn"
+          onclick="registerLoginFormsDisplay(loginModalBox, loginContainer)"
+        >
+          Zaloguj się
+        </button>
+        <button
+          id="registerBtn"
+          onclick="registerLoginFormsDisplay(registerModalBox, registerContainer)"
+        >
+          Zarejestruj się
+        </button>
 
-                <!-- Te dwa poniższe pojawią się dopiero po zalogowaniu -->
-                <button id="userIcon" class="hidden"><i class="fa-regular fa-user"></i></button>
-                <button id="logoutBtn" class="hidden">Wyloguj się</button>
-            </span>
+        <!-- Te dwa poniższe pojawią się dopiero po zalogowaniu -->
+        <button id="userIcon" class="hidden">
+          <i class="fa-regular fa-user"></i>
+        </button>
+        <button id="logoutBtn" class="hidden">Wyloguj się</button>
+      </span>
     </header>
 
-        <main>
-            <div class="container">
-                <div class="subContainer">
-                <div class="bookForm">
-                    <form>
-                        <label for="title">Tytuł:</label>
-                        <input type="text" name="title" class="inputs" required>
-                        <label for="author">Autor:</label>
-                        <input type="text" name="author" class="inputs" required>
-                        <label for="description">Opis:</label>
-                        <input type="text" name="description" class="inputs" required> 
-                        <label for="genre">Gatunek:</label>
-                        <input type="text" name="genre" class="inputs" required>
-                        <label for="quote">Cytat (opcjonalny):</label>
-                        <input type="text" name="quote" class="inputs">
-                        <button class="addBtn">Dodaj</button>
-                    </form>
-                    <hr>
-                </div>
-
-            <div class="displayBooks">
-                <div id="displayInfo">
-                    <span class="centerSpan"><h2 class="bookTitle">Tytul:</h2></span>
-                    <span><p class="bookAuthor">Autor:</p></span>
-                    <span><p>Opis:</p></span>
-                    <p class="bookDescryption"></p>
-                    <span><p class="bookGenre">Gatunek:</p></span>
-                    <span><p class="bookQuote">Cytat:</p></span>
-                    <hr>
-                <span class="centerBtns" id="centerSpan">
-                    <span class="buttons">
-                        <button class="previousBtn">Poprzednia</button><button class="deleteBtn">Usuń</button><button class="edit">Edytuj</button><button class="nextBtn">Następna</button>
-                    </span>
-                </span>
-             </div>
-            </div>
-            </div>
-            </div>
-        </main>
-
-        <!-- MODALS -->
-        <div id="loginContainer">
-            <div id="loginModalBox" class="modalBox hidden">
-            <button class="closeBtns" onclick="closeAnyModal()">X</button>
+    <main>
+      <div id="mainContent" class="container">
+        <div class="subContainer hidden">
+          <div class="bookForm">
             <form>
-                <ul>
-                <li><h2>LOGIN</h2></li>
-                <li><label for="login">Login:</label></li>
-                <li><input type="text" name="login" required></li>
-                <li><label for="password">Hasło:</label></li>
-                <li><input type="text" name="password" required></li>
-                <li><button>Zaloguj się</button></li>
-                </ul>
+              <h1>Dodaj książkę</h1>
+              <label for="title"><i class="fa-solid fa-font"></i></label>
+              <input
+                type="text"
+                name="title"
+                class="inputs"
+                placeholder="tytuł..."
+                required
+              />
+              <label for="author"><i class="fa-solid fa-user"></i></label>
+              <input
+                type="text"
+                name="author"
+                class="inputs"
+                placeholder="autor..."
+                required
+              />
+              <label for="description"
+                ><i class="fa-solid fa-comment-dots"></i
+              ></label>
+              <input
+                type="text"
+                name="description"
+                class="inputs"
+                placeholder="opis..."
+                required
+              />
+              <label for="genre"><i class="fa-solid fa-book"></i></label>
+              <input
+                type="text"
+                name="genre"
+                class="inputs"
+                placeholder="gatunek..."
+                required
+              />
+              <label for="quote"><i class="fa-solid fa-quote-right"></i></label>
+              <input
+                type="text"
+                name="quote"
+                placeholder="cytat(opcjonalny)..."
+                class="inputs"
+              />
+              <button class="addBtn">
+                <i class="fa-solid fa-plus"></i>Dodaj
+              </button>
             </form>
+            <hr />
+          </div>
+
+          <div class="displayBooks">
+            <div id="displayInfo">
+              <span class="centerSpan"><h2 class="bookTitle">Tytul:</h2></span>
+              <span><p class="bookAuthor">Autor:</p></span>
+              <p class="bookDescryption"></p>
+              <span><p class="bookGenre">Gatunek:</p></span>
+              <span>
+                <i class="fa-solid fa-quote-left"></i>
+                <p class="bookQuote">Cytat:</p>
+                <i class="fa-solid fa-quote-right"></i>
+              </span>
+              <hr />
+              <span class="centerBtns" id="centerSpan">
+                <span class="buttons">
+                  <button class="previousBtn">Poprzednia</button
+                  ><button class="deleteBtn">Usuń</button
+                  ><button class="edit">Edytuj</button
+                  ><button class="nextBtn">Następna</button>
+                </span>
+              </span>
             </div>
+          </div>
         </div>
+      </div>
+      <div id="startingContent" class="container">
+        <div class="subContainer2">
+          <div id="introductionTxt">
+            <section><h2>Księgarnia Słowo i Strona</h2></section>
+            <section id="siteIntroduction">
+              <article>
+                Witamy w „Papierowym zaułku” – miejscu, gdzie każda książka
+                czeka, by opowiedzieć Ci swoją historię. Od klasyki po najnowsze
+                bestsellery, od poradników po literaturę piękną – znajdziesz tu
+                wszystko, co kocha każdy miłośnik słowa pisanego.
+              </article>
+              <article>
+                Zanurz się w świecie inspiracji, odkrywaj nowe światy i pozwól,
+                by każda strona prowadziła Cię w podróż, jakiej jeszcze nie
+                przeżyłeś. Bo w „Słowo i Strona” książki to nie tylko lektura -
+                to przygoda.
+              </article>
+            </section>
 
-        <div id="registerContainer">
-            <div id="registerModalBox" class="modalBox hidden">
-                <button class="closeBtns" onclick="closeAnyModal()">X</button>
-                <form>                    
-                        <ul>
-                            <li><h2>REGISTER</h2></li>
-                            <li><label for="email">Email:</label></li>
-                            <li><input type="text" name="email" required></li>
-                            <li><label for="register">Login:</label></li>
-                            <li><input type="text" name="register" required></li>
-                            <li><label for="password">Hasło:</label></li>
-                            <li><input type="text" name="password" required></li>
-                            <li><button>Zarejestruj się</button></li>
-                        </ul>                    
-                </form>
-            </div>
+            <section>
+              <p>
+                <a href="#login">Zaloguj się,</a> żeby skorzystać z naszej
+                księgarni
+              </p>
+            </section>
+          </div>
         </div>
+      </div>
+    </main>
 
+    <footer>
+      <div>
+        <div><h2>Aleks Kaczmarczyk, ID: 66662</h2></div>
+        <div>
+          <h3>Internetowa Księgarnia</h3>
+        </div>
+      </div>
+    </footer>
 
-    </body>
-    <script src="script.js"></script>
+    <!-- MODALS -->
+    <div id="loginContainer">
+      <div id="loginModalBox" class="modalBox hidden">
+        <button class="closeBtns" onclick="closeAnyModal()">X</button>
+        <form>
+          <ul>
+            <li><h2>LOGIN</h2></li>
+            <li><label for="login">Login:</label></li>
+            <li><input type="text" name="login" required /></li>
+            <li><label for="password">Hasło:</label></li>
+            <li><input type="text" name="password" required /></li>
+            <li><button>Zaloguj się</button></li>
+          </ul>
+        </form>
+      </div>
+    </div>
+
+    <div id="registerContainer">
+      <div id="registerModalBox" class="modalBox hidden">
+        <button class="closeBtns" onclick="closeAnyModal()">X</button>
+        <form>
+          <ul>
+            <li><h2>REGISTER</h2></li>
+            <li><label for="email">Email:</label></li>
+            <li><input type="text" name="email" required /></li>
+            <li><label for="register">Login:</label></li>
+            <li><input type="text" name="register" required /></li>
+            <li><label for="password">Hasło:</label></li>
+            <li><input type="text" name="password" required /></li>
+            <li><button>Zarejestruj się</button></li>
+          </ul>
+        </form>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
 </html>
