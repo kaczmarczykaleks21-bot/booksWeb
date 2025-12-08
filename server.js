@@ -1,27 +1,27 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+"use strict";
+
+const express = require("express");
+const path = require("path");
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
 
-// Import tras
-const booksRoutes = require('./backend/routes/books');
-const usersRoutes = require('./backend/routes/users'); 
+const booksRoutes = require("./backend/routes/books");
+const usersRoutes = require("./backend/routes/users");
 
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.use("/api/books", booksRoutes);
+app.use("/api", usersRoutes);
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+module.exports = app;
 
-// Użyj tras
-app.use('/api/books', booksRoutes);
-app.use('/api', usersRoutes); 
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server działa na porcie ${PORT}`));
+}
