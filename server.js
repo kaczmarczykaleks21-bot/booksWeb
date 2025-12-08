@@ -19,6 +19,20 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+app.use((err, req, res, next) => {
+  console.error(err);
+
+  const status = err.status || 500;
+
+  res.status(status).json({
+    timestamp: new Date().toISOString(),
+    status,
+    error: err.name || "Error",
+    message: err.message || "Wystąpił błąd",
+    path: req.originalUrl,
+  });
+});
+
 module.exports = app;
 
 if (require.main === module) {
