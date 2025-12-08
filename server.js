@@ -1,26 +1,27 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
+
 const app = express();
 
-const booksRoutes = require('./backend/routes/books');
-const usersRoutes = require('./backend/routes/users');
+const booksRoutes = require("./backend/routes/books");
+const usersRoutes = require("./backend/routes/users");
 
 app.use(express.json());
 
+app.use("/api/books", booksRoutes);
+app.use("/api", usersRoutes);
 
-app.use('/api/books', booksRoutes);
-app.use('/api', usersRoutes);
+app.use(express.static(path.join(__dirname, "public")));
 
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+module.exports = app;
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server działa na porcie ${PORT}`));
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server działa na porcie ${PORT}`));
+}

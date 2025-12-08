@@ -1,28 +1,25 @@
 {
   "name": "booksweb",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "npm rebuild sqlite3 --build-from-source"
+    "dev": "nodemon server.js",
+    "test": "mocha --recursive --exit",
+    "postinstall": "npm rebuild better-sqlite3 --build-from-source"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kaczmarczykaleks21-bot/booksWeb.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/kaczmarczykaleks21-bot/booksWeb/issues"
-  },
-  "homepage": "https://github.com/kaczmarczykaleks21-bot/booksWeb#readme",
   "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^12.4.6",
-    "cors": "^2.8.5",
-    "express": "^4.18.2"
-  }
+    "joi": "^17.9.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3",
+    "nodemon": "^2.0.22"
+  },
+  "type": "commonjs"
 }
