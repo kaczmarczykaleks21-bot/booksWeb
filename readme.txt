@@ -161,9 +161,14 @@ booksWeb/
 │   └── db/
 ├── public/
 │   └── index.html
+├── test/
+│   └── books.test.js
 ├── .github/
 │   └── workflows/
 │       ├── ci.yml
 │       └── deploy.yml
 ├── server.js
 └── README.md
+
+🌐 Live Demo
+Adres produkcyjny:  [Zobacz działającą aplikację](https://booksweb-pkm4.onrender.com/)
