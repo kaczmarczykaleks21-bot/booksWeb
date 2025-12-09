@@ -3,25 +3,28 @@ const { expect } = require("chai");
 const app = require("../server");
 
 describe("Books API", () => {
-  beforeEach(() => {
-    // resetuje stan in-memory - jeśli twoja implementacja trzyma dane w pliku/db,
-    // trzeba to odpowiednio ustawić. Tutaj app używa `books` w module server.js,
-    // więc restart procesu resetuje stan. Testy uruchamiane pojedynczo będą działać.
-  });
-
-  it("POST /api/books - tworzy książkę (200+)", async () => {
-    const payload = { title: "Test book", author: "Author 1" };
+  it("POST /api/books - tworzy książkę", async () => {
+    const payload = {
+      title: "Test book",
+      author: "Author 1",
+      genre: "Klasyka",
+    };
     const res = await request(app).post("/api/books").send(payload);
-    expect(res.status).to.equal(201);
-    expect(res.body).to.include({ title: "Test book", author: "Author 1" });
+    expect(res.status).to.equal(200);
+    expect(res.body).to.include({
+      title: "Test book",
+      author: "Author 1",
+      genre: "Klasyka",
+    });
     expect(res.body).to.have.property("id");
   });
 
-  it("POST /api/books - walidacja błędu (brak title)", async () => {
-    const payload = { author: "Author 1" };
+  it("POST /api/books - walidacja brak gatunku", async () => {
+    const payload = { title: "Test book", author: "Author 1" };
     const res = await request(app).post("/api/books").send(payload);
     expect(res.status).to.equal(400);
-    expect(res.body).to.have.property("errors");
+    expect(res.body).to.have.property("message");
+    expect(res.body.message).to.equal("Gatunek musi zostać wybrany!");
   });
 
   it("GET /api/books - zwraca tablicę", async () => {
